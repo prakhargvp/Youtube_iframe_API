@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Youtube IFrame API</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="http://www.youtube.com/player_api"></script> 
+	<style type="text/css">
+	.main-content{
+		width: fit-content;
+		margin: 0px auto;
+		margin-top: 50px;
+	}
+	.main-content > iframe{
+		height: 250px;
+		margin: 0px auto;
+		float: none;
+		padding: 25px;
+		border: 2px solid #e1e1e2;
+		background: #eee;
+	}
+	</style>
+</head>
+<body>
+	<div class="main-content">
+		<iframe src="https://www.youtube.com/embed/phhtPnUlAUs?enablejsapi=1" frameborder="0" allowfullscreen></iframe>		
+		<iframe src="https://www.youtube.com/embed/phhtPnUlAUs?enablejsapi=1" frameborder="0" allowfullscreen></iframe>	
+		<iframe src="https://www.youtube.com/embed/phhtPnUlAUs?enablejsapi=1" frameborder="0" allowfullscreen></iframe>	
+	</div>
+<!-- Javascript/Jquery -->
+<script type="text/javascript">
+var vids = [];
+$(document).ready(function(){
+	setTimeout(function(){
+		$('.main-content iframe').each(function(e){
+			player = new YT.Player(this, {
+				events:{
+					'onStateChange': onPlayerStateChange					
+				}
+			});	
+			vids.push(player);
+		});
+	  }, 5000);
+	
+});
+function onPlayerStateChange(event){
+	if(event.data == YT.PlayerState.PLAYING){
+		console.log("Playing..");
+		// TO Perform Action
+		// 1. To Pause All Youtube Videos
+		console.log(event.target);
+		pauseYTVideos(event)
+		
+	}else if(event.data == YT.PlayerState.PAUSED){
+		console.log("Pause....");
+		// TO Perform Action
+	}else{
+		console.log("State Changed...");
+		// TO Perform Action
+	}
+}
+
+function pauseYTVideos(event){
+	for(var i=0; i<vids.length; i++){
+		if(event.target!=vids[i])
+			vids[i].pauseVideo();
+	}
+}
+</script>
+</body>
+</html>

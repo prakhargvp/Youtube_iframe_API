@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Youtube IFrame API</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="http://www.youtube.com/player_api"></script> 
+	<style type="text/css">
+	.main-content{
+		width: fit-content;
+		margin: 0px auto;
+		margin-top: 50px;
+	}
+	.main-content > div {
+		height: 250px;
+		margin: 0px auto;
+		float: left;
+		padding: 25px;
+		border: 2px solid #e1e1e2;
+		background: #eee;
+		margin:2px;
+	}
+	.main-content > div iframe{
+		width:100%;
+		height:100%;
+	}
+	</style>
+</head>
+<body>
+	<div class="main-content">
+		<div>
+			<iframe src="https://www.youtube.com/embed/phhtPnUlAUs?enablejsapi=1" frameborder="0" allowfullscreen onload="player1=new YT.Player(this)"></iframe>
+			<div class="custom-toolBar">
+				<button onclick="player1.playVideo()">Play</button>
+				<button onclick="player1.pauseVideo()">Pause</button>
+				<button onclick="player1.stopVideo()">Stop</button>
+				<button onclick="player1.mute()">Sound Off</button>
+				<button onclick="player1.unMute()">Sound On</button>
+				<button onclick="player1.seekTo(0)">Restart</button>
+			</div>		
+		</div>
+		<div>
+			<iframe src="https://www.youtube.com/embed/phhtPnUlAUs?enablejsapi=1" frameborder="0" allowfullscreen onload="player2=new YT.Player(this)"></iframe>
+			<div class="custom-toolBar">
+				<button onclick="player2.playVideo()">Play</button>
+				<button onclick="player2.pauseVideo()">Pause</button>
+				<button onclick="player2.stopVideo()">Stop</button>
+				<button onclick="player2.mute()">Sound Off</button>
+				<button onclick="player2.unMute()">Sound On</button>
+				<button onclick="player2.seekTo(0)">Restart</button>
+			</div>			
+		</div>
+		<div>
+			<iframe src="https://www.youtube.com/embed/phhtPnUlAUs?enablejsapi=1" frameborder="0" allowfullscreen onload="player3=new YT.Player(this)"></iframe>
+			<div class="custom-toolBar">
+				<button onclick="player3.playVideo()">Play</button>
+				<button onclick="player3.pauseVideo()">Pause</button>
+				<button onclick="player3.stopVideo()">Stop</button>
+				<button onclick="player3.mute()">Sound Off</button>
+				<button onclick="player3.unMute()">Sound On</button>
+				<button onclick="player3.seekTo(0)">Restart</button>
+			</div>			
+		</div>
+	</div>
+<!-- Javascript/Jquery -->
+<script type="text/javascript" src="YTIframeControl.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Youtube IFrame API</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="http://www.youtube.com/player_api"></script> 
+	<style type="text/css">
+	.main-content{
+		width: fit-content;
+		margin: 0px auto;
+		margin-top: 50px;
+	}
+	.main-content > div {
+		height: 250px;
+		margin: 0px auto;
+		float: left;
+		padding: 25px;
+		border: 2px solid #e1e1e2;
+		background: #eee;
+		margin:2px;
+	}
+	.main-content > div iframe{
+		width:100%;
+		height:100%;
+	}
+	</style>
+</head>
+<body>
+	<div class="main-content">
+		<div>
+			<iframe src="https://www.youtube.com/embed/phhtPnUlAUs?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+			<div class="custom-toolBar">
+				<button class="YTPlay">Play</button>
+				<button class="YTPause">Pause</button>
+				<button class="YTStop">Stop</button>
+				<button class="YTSoundOff">Sound Off</button>
+				<button class="YTSoundOn">Sound On</button>
+				<button class="YTRestart">Restart</button>
+			</div>		
+		</div>
+		<div>
+			<iframe src="https://www.youtube.com/embed/phhtPnUlAUs?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+			<div class="custom-toolBar">
+				<button class="YTPlay">Play</button>
+				<button class="YTPause">Pause</button>
+				<button class="YTStop">Stop</button>
+				<button class="YTSoundOff">Sound Off</button>
+				<button class="YTSoundOn">Sound On</button>
+				<button class="YTRestart">Restart</button>
+			</div>			
+		</div>
+		<div>
+			<iframe src="https://www.youtube.com/embed/phhtPnUlAUs?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+			<div class="custom-toolBar">
+				<button class="YTPlay">Play</button>
+				<button class="YTPause">Pause</button>
+				<button class="YTStop">Stop</button>
+				<button class="YTSoundOff">Sound Off</button>
+				<button class="YTSoundOn">Sound On</button>
+				<button class="YTRestart">Restart</button>
+			</div>			
+		</div>
+	</div>
+<!-- Javascript/Jquery -->
+<script type="text/javascript">
+var vids = [];
+$(document).ready(function(){
+	setTimeout(function(){
+		$('.main-content iframe').each(function(e){
+			var player = new YT.Player(this, {
+				events:{
+					'onStateChange': onPlayerStateChange					
+				}
+			});	
+			// Add Custom Options
+			var parent = $(this).parent();
+			parent.find('.YTPlay').attr('title','hello');
+			parent.find('.YTPlay').on('click', function(){player.playVideo()});
+			parent.find('.YTPause').on('click', function(){player.pauseVideo()});
+			parent.find('.YTStop').on('click', function(){player.stopVideo()});
+			parent.find('.YTSoundOff').on('click', function(){player.mute()});
+			parent.find('.YTSoundOn').on('click', function(){player.unMute()});
+			parent.find('.YTRestart').on('click', function(){player.seekTo(0)});
+			// 
+			vids.push(player);
+		});
+	  }, 5000);
+	
+});
+function onPlayerStateChange(event){
+	if(event.data == YT.PlayerState.PLAYING){
+		console.log("Playing..");
+		// TO Perform Action
+		// 1. To Pause All Youtube Videos
+		console.log(event.target);
+		pauseYTVideos(event)
+		
+	}else if(event.data == YT.PlayerState.PAUSED){
+		console.log("Pause....");
+		// TO Perform Action
+	}else{
+		console.log("State Changed...");
+		// TO Perform Action
+	}
+}
+
+function pauseYTVideos(event){
+	for(var i=0; i<vids.length; i++){
+		if(event.target!=vids[i])
+			vids[i].pauseVideo();
+	}
+}
+</script>
+</body>
+</html>
